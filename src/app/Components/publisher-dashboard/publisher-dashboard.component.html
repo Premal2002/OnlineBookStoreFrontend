@@ -1,0 +1,51 @@
+<header>
+  <app-common-navbar [publisherNav]=true [customerNav]=false [adminNav]=false></app-common-navbar>
+</header>
+<div class="container mt-4">
+  <!-- Title -->
+  <div class="row">
+    <div class="col-md-12  mb-4">
+      <h1>Welcome, {{pName}}</h1>
+      <hr>
+      <h2>Publisher Dashboard</h2>
+    </div>
+  </div>
+<div class="container mb-5">
+    <!-- Total Published Books Section -->
+    <div class="row dashboard-section">
+      <div class="col-md-6">
+        <div class="count-section">
+          <h5>Total Published Books</h5>
+          <p class="display-4">{{ bCount }}</p>
+        </div>
+      </div>
+      <!-- Total Sold Books Section -->
+      <div class="col-md-6">
+        <div class="count-section">
+          <h5>Total Sold Books</h5>
+          <p class="display-4">{{bSoldCount}}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Publisher Options -->
+    <div class="row dashboard-section">
+      <div class="col-md-2">
+        <a [routerLink]="['/publishBook', pId]" class="btn btn-primary btn-block operation-btn">Publish New Book</a>
+      </div>
+      <div class="col-md-2">
+        <a [routerLink]="['/viewPublishedBooks']"  class="btn btn-info btn-block operation-btn">View Published Books</a>
+      </div>
+    </div>
+
+    <!-- Static Graph Section -->
+    <!-- Graph Section -->
+    <div class="row graph-section">
+      <div class="col-md-2 ">
+        <canvas id="bookGraph" style="width: 800px; height: 400px; margin: auto;"></canvas>
+      </div>
+    </div>
+  </div>
+  </div>  
+
+  <app-footer></app-footer>

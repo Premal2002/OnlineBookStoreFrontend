@@ -1,0 +1,61 @@
+<header>
+    <app-common-navbar [publisherNav]=false [customerNav]=true [adminNav]=false></app-common-navbar>
+</header>
+
+<div class="container mt-4">
+  
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="card">
+          <h3>Book Details</h3>
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <div class="book-image">
+                <img class="img-fluid" src="{{book.bImgPath}}" alt="Book Image">
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">{{book.bTitle}}</h5>
+                <p class="card-text">{{book.bDesc}}</p>
+                <p class="card-text"><strong>Category:</strong> {{book.bCategory}}</p>
+                <p class="card-text"><strong>Price:</strong> {{book.bPrice}} Rs</p>
+                <p class="card-text"><strong>Status:</strong> {{book.bStatus}}</p>
+                <p class="card-text"><strong>Publisher:</strong> {{publisher.pName}} / {{publisher.pCountry}}</p>
+                <button (click)="addToCart(book.bId,book.bTitle,book.bDesc,book.bPrice,book.bImgPath,book.bStatus)" type="button" class="btn btn-primary btn-block">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="similarBooks" class="container mt-5 mb-3">
+   
+    <h2 class="mb-4">Similar Books</h2>
+    <div class="row">
+      <!-- Product 1 -->
+      <div *ngFor="let book of bList | paginate : {itemsPerPage : count,currentPage : p}" class="col-md-2 mb-3">
+          <div class="card product-card">
+            <button type="button" class="btn btn-link product-link" (click)="navigateToSingleBookInfo(book.bId)">
+              <img class="card-img-top" [src]="book.bImgPath" alt="{{ book.title }}">
+            </button>
+            <div class="card-body">
+              <h5 class="card-title">{{ book.bTitle }}</h5>
+              <p class="card-text">{{ book.bPrice }} Rs</p>
+              <button (click)="addToCart(book.bId,book.bTitle,book.bDesc,book.bPrice,book.bImgPath,book.bStatus)" type="button" class="btn btn-primary btn-block">Add to Cart</button>
+            </div>
+          </div>
+      </div>
+      
+    <!-- Repeat for other products -->
+    <!-- Repeat for other products -->
+    </div>
+
+    <div class="text-right">
+      <pagination-controls (pageChange)="p=$event"></pagination-controls>
+    </div>
+  </div>
+  
+
+  <app-footer></app-footer>

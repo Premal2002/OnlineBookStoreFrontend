@@ -1,0 +1,71 @@
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-image: none; /* Remove default icon */
+    width: 40px; /* Set width of icon */
+    height: 40px; /* Set height of icon */
+    line-height: 40px; /* Center icon vertically */
+    font-size: 24px; /* Set icon size */
+    color: #007bff; /* Set icon color */
+    background-color: rgba(255, 255, 255, 0.5); /* Set background color with opacity */
+    border-radius: 50%; /* Make it circular */
+  }
+  .carousel-control-prev-icon:before {
+    content: '❮'; /* Unicode for left arrow */
+  }
+  .carousel-control-next-icon:before {
+    content: '❯'; /* Unicode for right arrow */
+  }
+
+  .navbar-nav .nav-item .nav-link {
+    padding: 10px 20px; /* Add padding to each nav link */
+  }
+
+  
+  .navbar-nav .nav-item .nav-link:hover {
+    background-color: #C08B5C; /* Change background color on hover */
+    color: #fff; /* Change text color on hover */
+  }
+
+
+  /* products */
+  /* Customize product cards */
+  .product-card {
+    max-width: 200px; /* Set max width of product card */
+    
+  }
+  .product-card .card-img-top {
+    height: 170px; /* Set height of product image */
+    object-fit: cover; /* Ensure image covers the entire space */
+  }
+
+  /* Hover effect for product cards */
+.product-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Link style for product images */
+.product-card .card-img-top {
+  cursor: pointer;
+}
+.product-link{
+  text-decoration: none;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+  justify-content: center; /* Center content vertically */
+}
+
+.card-img-top {
+   /* Ensure the image doesn't exceed the container's height */
+  max-width: fit-content;
+  max-height: fit-content;
+  object-fit: contain; /* Maintain aspect ratio and fit the image within the container */
+}
+
+.card-title{
+  height: 60px;
+}

@@ -1,0 +1,84 @@
+<header>
+  <app-common-navbar [publisherNav]=false [customerNav]=true [adminNav]=false></app-common-navbar>
+</header>
+
+<div class="container-fluid pt-5 pb-5">
+  <div class="card">
+      <div class="card-header bg-primary text-white">
+          <h1 class="mb-0 text-center">Your Profile</h1>
+      </div>
+      <div class="card-body">
+          <form #profileForm="ngForm" (ngSubmit)="saveProfile(customer)" class="needs-validation" novalidate>
+              <div class="form-group">
+                  <label for="name">Name:</label>
+                  <div class="input-group">
+                      <input type="text" class="form-control" id="name" name="name" [(ngModel)]="customer.customer_name"
+                             [disabled]="!isEditingName" required #name="ngModel"
+                             [class.is-invalid]="name.invalid && name.touched">
+                      <div class="input-group-append">
+                          <button type="button" class="btn btn-outline-secondary" (click)="toggleEditing('name')">
+                              <i class="fas" [ngClass]="{'fa-save': isEditingName, 'fa-edit': !isEditingName}"></i> {{ isEditingName ? 'Save' : 'Edit' }}
+                          </button>
+                      </div>
+                      <div *ngIf="name.invalid && name.touched">
+                          <small class="text-danger" *ngIf="name.errors?.['required']">Name is required.</small>
+                      </div>
+                  </div>
+              </div><br>
+              <div class="form-group">
+                  <label for="address">Address:</label>
+                  <div class="input-group">
+                      <input type="text" class="form-control" id="address" name="address" [(ngModel)]="customer.customer_address"
+                             [disabled]="!isEditingAddress" required #address="ngModel"
+                             [class.is-invalid]="address.invalid && address.touched">
+                      <div class="input-group-append">
+                          <button type="button" class="btn btn-outline-secondary" (click)="toggleEditing('address')">
+                              <i class="fas" [ngClass]="{'fa-save': isEditingAddress, 'fa-edit': !isEditingAddress}"></i> {{ isEditingAddress ? 'Save' : 'Edit' }}
+                          </button>
+                      </div>
+                      <div *ngIf="address.invalid && address.touched">
+                          <small class="text-danger" *ngIf="address.errors?.['required']">Address is required.</small>
+                      </div>
+                  </div>
+              </div><br>
+              <div class="form-group">
+                  <label for="contact">Contact:</label>
+                  <div class="input-group">
+                      <input type="text" class="form-control" id="contact" name="contact" [(ngModel)]="customer.customer_contact"
+                             [disabled]="!isEditingContact" required pattern="[7-9][0-9]{9}" #contact="ngModel"
+                             [class.is-invalid]="contact.invalid && contact.touched">
+                      <div class="input-group-append">
+                          <button type="button" class="btn btn-outline-secondary" (click)="toggleEditing('contact')">
+                              <i class="fas" [ngClass]="{'fa-save': isEditingContact, 'fa-edit': !isEditingContact}"></i> {{ isEditingContact ? 'Save' : 'Edit' }}
+                          </button>
+                      </div>
+                      <div *ngIf="contact.invalid && contact.touched">
+                          <small class="text-danger" *ngIf="contact.errors?.['required']">Contact number is required.</small>
+                          <small class="text-danger" *ngIf="contact.errors?.['pattern']">Please enter a valid 10-digit phone number starting with 7, 8, or 9.</small>
+                      </div>
+                  </div>
+              </div><br>
+              <div class="form-group">
+                  <label for="email">Email:</label>
+                  <div class="input-group">
+                      <input type="email" class="form-control" id="email" name="email" [(ngModel)]="customer.email"
+                             [disabled]="!isEditingEmail" required email #email="ngModel"
+                             [class.is-invalid]="email.invalid && email.touched">
+                      <div class="input-group-append">
+                          <button type="button" class="btn btn-outline-secondary" (click)="toggleEditing('email')">
+                              <i class="fas" [ngClass]="{'fa-save': isEditingEmail, 'fa-edit': !isEditingEmail}"></i> {{ isEditingEmail ? 'Save' : 'Edit' }}
+                          </button>
+                      </div>
+                      <div *ngIf="email.invalid && email.touched">
+                          <small class="text-danger" *ngIf="email.errors?.['required']">Email is required.</small>
+                          <small class="text-danger" *ngIf="email.errors?.['email']">Please enter a valid email address.</small>
+                      </div>
+                  </div>
+              </div><br>
+              <button type="submit" class="btn btn-primary" [disabled]="profileForm.form.invalid">Save All</button>
+          </form>
+      </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

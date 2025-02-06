@@ -1,0 +1,91 @@
+ <!-- Carousel -->
+ <header>
+  <app-common-navbar [publisherNav]=false [customerNav]=true [adminNav]=false></app-common-navbar>
+</header>
+
+ <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="d-block w-60" src="../../../assets/WhatsApp Image 2024-04-25 at 3.46.53 PM.jpeg" alt="First slide">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-60" src="../../../assets/WhatsApp Image 2024-04-25 at 3.47.27 PM.jpeg" alt="Second slide">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-60" src="../../../assets/WhatsApp Image 2024-04-25 at 3.47.41 PM.jpeg" alt="Third slide">
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only text-white ">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <button class="nav-link btn btn-link" (click)="allBooksCat()">All Books</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link btn btn-link" (click)="findOtherCat('Fiction')">Fiction</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link btn btn-link" (click)="findOtherCat('Non-Fiction')">Non Fiction</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link btn btn-link" (click)="findOtherCat('Childrens')">Children's</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link btn btn-link" (click)="findOtherCat('Educational')">Educational</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link btn btn-link" (click)="findOtherCat('Music')">Music</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link btn btn-link" (click)="findOtherCat('Manga')">Manga</button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+
+  <!-- Product Display Section -->
+  <div class="container mt-4">
+    <h2 class="mb-4">{{currentCategory}}</h2>
+    <div class="row">
+      <!-- Product 1 -->
+      <div *ngFor="let book of bList | paginate : {itemsPerPage : count,currentPage : p}" class="col-md-2 mb-3">
+        
+          <div class="card product-card">
+            <a routerLink="/singleBookInfo/{{book.bId}}" class="product-link">
+            <img class="card-img-top" [src]="book.bImgPath" alt="{{ book.title }}">
+            </a>
+            <div class="card-body">
+              <h5 class="card-title">{{ book.bTitle }}</h5>
+              <p class="card-text">{{ book.bPrice }} Rs</p>
+              <button (click)="addToCart(book.bId,book.bTitle,book.bDesc,book.bPrice,book.bImgPath,book.bStatus)" type="button" class="btn btn-primary btn-block">Add to Cart</button>
+            </div>
+          </div>
+        
+      </div>  
+      </div>
+
+      <div class="text-right">
+        <pagination-controls (pageChange)="p=$event"></pagination-controls>
+      </div>
+      </div>
+    <!-- Repeat for other products -->
+
+    <!-- Repeat for other products -->
+    
+  <app-footer></app-footer>

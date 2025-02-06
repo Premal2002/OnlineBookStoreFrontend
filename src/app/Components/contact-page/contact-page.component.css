@@ -1,0 +1,48 @@
+.container-fluid{
+  min-height: 86%;
+}
+.back {
+    background: linear-gradient(to bottom right, #FFB0B0, #E0CCBE); /* Gradient colors */
+    color: white; /* Text color */
+  }
+  .btn{
+    cursor: pointer;
+    position:centre;
+  }
+  
+  .card {
+    font-weight: bold;
+    padding: 20px;
+    color: dark grey;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .form-control {
+    margin-bottom: 1rem;
+  }
+  
+  /* h1{
+    font-weight: bold;
+    color: #333 ;
+  } */
+
+.btn{
+  cursor: pointer;
+  position:centre;
+}
+
+
+
+.form-control {
+  margin-bottom: 1rem;
+}
+
+#email,#name{
+    cursor: not-allowed;
+}
+
+/* h1{
+  font-weight: bold;
+  color: #333 ;
+} */

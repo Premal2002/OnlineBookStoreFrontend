@@ -1,0 +1,17 @@
+<header>
+    <app-common-navbar [publisherNav]=false [customerNav]=false [adminNav]=true></app-common-navbar>
+ </header>
+
+<div class="container mt-5 mb-5">
+    <h2 class="mb-4">Admin Dashboard</h2>
+    <!-- <div class="col-md-5 border p-5 mt-5 bg-dark" > -->
+        <div class="row">
+            <button (click)="managePublisher()" class="btn btn-primary me-3 col-lg-4 bo p-5 mt-5" type="button">Manage Publishers</button>
+            <button (click)="manageBook()" class="btn btn-info me-3 col-lg-4 bo p-5 mt-5" type="button">View/Manage Books</button>
+            <button (click)="manageOrders()" class="btn btn-danger  me-3  col-lg-4 bo p-5 mt-5" type="button">View/Process Orders</button>
+            <button (click)="manageOueries()" class="btn btn-warning  me-3 col-lg-4 bo p-4 mt-5" type="button">View / process User Queries</button>
+    </div>
+</div>
+
+<app-footer></app-footer>
+

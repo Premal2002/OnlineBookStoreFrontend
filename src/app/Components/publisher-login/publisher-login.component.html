@@ -1,0 +1,50 @@
+<!-- two way binding -->
+<header>
+    <app-common-navbar [publisherNav]=false [customerNav]=false [adminNav]=false></app-common-navbar>
+ </header>
+ 
+<!-- Publisher Login Page -->
+<!-- Publisher Login Page -->
+<div class="container-fluid back">
+    <div class="row">
+      <div class="col-md-4 offset-md-4">
+        <div class="card mt-5">
+          <div class="card-body">
+            <form (ngSubmit)="handlelogin()" #publisherForm="ngForm">
+              <h1 class="text-center"><b>Publisher Login</b></h1><br>
+              <div class="form-group">
+                <label for="username"><b>Email Address:</b></label><br>
+                <input class="form-control" placeholder="Enter your email" type="email" name="username" [(ngModel)]="publisher.email" required #username="ngModel"
+                       [class.is-invalid]="username.invalid && username.touched" />
+                <div *ngIf="username.invalid && username.touched">
+                  <small class="text-danger" *ngIf="username.errors?.['required']">Email is required.</small>
+                  <small class="text-danger" *ngIf="username.errors?.['email']">Invalid email format.</small>
+                </div>
+              </div>
+              <div class="form-group position-relative">
+                <label for="password"><b>Password:</b></label><br>
+                <input type="{{ passwordVisible ? 'text' : 'password' }}" class="form-control pr-5" placeholder="Enter your password" name="password" [(ngModel)]="publisher.password" required #password="ngModel"
+                       [class.is-invalid]="password.invalid && password.touched" />
+                <span class="position-absolute translate-middle-y text-dark" style="cursor: pointer; top:40px; right:30px;" (click)="togglePasswordVisibility()">
+                    <i class="fas" [ngClass]="{ 'fa-eye': !passwordVisible, 'fa-eye-slash': passwordVisible }"></i>
+                </span>
+                <div *ngIf="password.invalid && password.touched">
+                    <small class="text-danger" *ngIf="password.errors?.['required']">Password is required.</small>
+                </div>
+            </div>
+            
+              <div class="text-center">
+                <button type="submit" class="btn btn-success">Login</button><br>
+                <button type="button" class="btn btn-link" (click)="forgotpass()">Forgot Password</button><br>
+                <p>Still haven't applied for a Publisher Account? <button type="button" class="btn btn-link" (click)="publisherRegister()">Apply Here</button></p>
+                <p>Want to login as Customer? <br><button type="button" class="btn btn-link" (click)="customerLogin()">Click Here</button></p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<app-footer></app-footer>
+
+

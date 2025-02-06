@@ -1,0 +1,13 @@
+.footer {
+    margin-top: 20px;
+    width: 100%;
+    background-color: #161A30; /* Background color for the footer */
+    padding: 20px; /* Adjust padding as needed */
+    text-align: center; /* Align content to center */
+  }
+
+  
+.container {
+  flex: 1;
+}
+

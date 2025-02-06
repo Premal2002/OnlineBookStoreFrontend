@@ -1,0 +1,83 @@
+<!-- app.component.html -->
+<header>
+  <app-common-navbar [publisherNav]=false [customerNav]=false [adminNav]=false></app-common-navbar>
+</header>
+
+<div class="container-fluid back">
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="card mt-5">
+        <div class="card-body">
+          <form (ngSubmit)="onSubmit()" #customerForm="ngForm">
+            <h1 class="text-center mb-4">Customer Registration</h1>
+            
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" class="form-control" id="name" name="name" [(ngModel)]="customer.customer_name" placeholder="Enter your name" required minlength="3" #name="ngModel"
+              [class.is-invalid]="name.invalid && name.touched" />
+              <div *ngIf="name.invalid && name.touched">
+                <small class="text-danger" *ngIf="name.errors?.['required']">Name is required.</small>
+                <small class="text-danger" *ngIf="name.errors?.['minlength']">Name must be at least 3 characters long.</small>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="address">Address:</label>
+              <input type="text" class="form-control" id="address" name="address" [(ngModel)]="customer.customer_address" placeholder="Enter your address" required #address="ngModel"
+              [class.is-invalid]="address.invalid && address.touched" />
+              <div *ngIf="address.invalid && address.touched">
+                <small class="text-danger" *ngIf="address.errors?.['required']">Address is required.</small>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="contact">Contact:</label>
+              <input type="text" class="form-control" id="contact" name="contact" [(ngModel)]="customer.customer_contact" placeholder="Enter your phone number" required pattern="[7-9][0-9]{9}" #contact="ngModel"
+              [class.is-invalid]="contact.invalid && contact.touched" />
+              <div *ngIf="contact.invalid && contact.touched">
+                <small class="text-danger" *ngIf="contact.errors?.['required']">Contact number is required.</small>
+                <small class="text-danger" *ngIf="contact.errors?.['pattern']">Please enter a valid 10-digit phone number starting with 7, 8, or 9.</small>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" class="form-control" id="email" name="email" [(ngModel)]="customer.email" placeholder="Enter your email" required email #email="ngModel"
+              [class.is-invalid]="email.invalid && email.touched" />
+              <div *ngIf="email.invalid && email.touched">
+                <small class="text-danger" *ngIf="email.errors?.['required']">Email is required.</small>
+                <small class="text-danger" *ngIf="email.errors?.['email']">Please enter a valid email address.</small>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <div class="position-relative">
+                  <input type="{{ passwordVisible ? 'text' : 'password' }}" class="form-control pr-5" id="password" name="password" [(ngModel)]="customer.password" placeholder="Create new password" required minlength="6" 
+                      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" #password="ngModel"
+                      [class.is-invalid]="password.invalid && password.touched" />
+                  <span class="position-absolute top-50  translate-middle-y text-dark" style="cursor: pointer; right:30px;" (click)="togglePasswordVisibility()">
+                      <i class="fa" [ngClass]="{ 'fa-eye': !passwordVisible, 'fa-eye-slash': passwordVisible }"></i>
+                  </span>
+              </div>
+              <div *ngIf="password.invalid && password.touched">
+                  <small class="text-danger" *ngIf="password.errors?.['required']">Password is required.</small>
+                  <small class="text-danger" *ngIf="password.errors?.['minlength']">Password must be at least 6 characters long.</small>
+                  <small class="text-danger" *ngIf="password.errors?.['pattern']">Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.</small>
+              </div>
+          </div>
+          
+            
+            <div class="container d-flex justify-content-center align-items-center">
+              <button type="submit" class="btn btn-primary btn-block" [disabled]="customerForm.form.invalid">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+     
+  </div>
+    
+</div>
+
+<app-footer></app-footer>

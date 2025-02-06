@@ -1,0 +1,30 @@
+.container-fluid{
+  min-height: 93%;
+}
+
+.back {
+    background: linear-gradient(to bottom right, #F7C566, #FFEBB2); /* Gradient colors */
+    
+    padding-bottom: 50px;
+  }
+  
+  .btn{
+    cursor: pointer;
+    position:centre;
+  }
+  
+  .card {
+    font-weight: bold;
+    padding: 20px;
+    color:dark grey;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .form-control {
+    margin-bottom: 1rem;
+  }
+
+  .card p{
+    color: dark grey;
+  }

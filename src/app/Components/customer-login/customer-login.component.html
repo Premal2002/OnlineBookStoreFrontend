@@ -1,0 +1,52 @@
+
+<!-- two way binding -->
+<header>
+    <app-common-navbar [publisherNav]=false [customerNav]=false [adminNav]=false></app-common-navbar>
+ </header>
+
+<!-- Customer Login Page -->
+<div class="container-fluid back">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <form #customerForm="ngForm" (ngSubmit)="handlelogin()">
+                        <h1 class="text-center mb-4"><b>Login</b></h1>
+                        <div class="form-group">
+                            <label for="email"><b>Email Address:</b></label><br>
+                            <input type="email" class="form-control" placeholder="Enter your email" name="email" [(ngModel)]="customer.email" required #email="ngModel"
+                                [class.is-invalid]="email.invalid && email.touched" />
+                            <div *ngIf="email.invalid && email.touched">
+                                <small class="text-danger" *ngIf="email.errors?.['required']">Email is required</small>
+                                <small class="text-danger" *ngIf="email.errors?.['email']">Invalid email format</small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password"><b>Password:</b></label><br>
+                            <div class="position-relative">
+                                <input type="{{ passwordVisible ? 'text' : 'password' }}" class="form-control pr-5" id="password" name="password" [(ngModel)]="customer.password" placeholder="Enter your password" required #password="ngModel"
+                                    [class.is-invalid]="password.invalid && password.touched" />
+                                <span class="position-absolute top-50  translate-middle-y text-dark" style="cursor: pointer; right:30px;" (click)="togglePasswordVisibility()">
+                                    <i class="fas" [ngClass]="{ 'fa-eye': !passwordVisible, 'fa-eye-slash': passwordVisible }"></i>
+                                </span>
+                            </div>
+                            <div *ngIf="password.invalid && password.touched">
+                                <small class="text-danger" *ngIf="password.errors?.['required']">Password is required</small>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success">Login</button><br>
+                            <button type="button" class="btn btn-link text-dark" (click)="forgotpass()">Forgot Password</button><br>
+                            <p>Don't have an account? <button type="button" class="btn btn-link text-dark" (click)="createacc()">Create Account</button></p>
+                            <p>Want to login as Publisher? <button type="button" class="btn btn-link text-dark" (click)="publisherLogin()">Click Here</button></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<app-footer></app-footer>

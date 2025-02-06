@@ -1,0 +1,5 @@
+.container-fluid{
+    padding: 0 250px;
+    background: linear-gradient(to bottom right, #E78895, #19A7CE); /* Gradient colors */
+    min-height: 90%;
+}

@@ -1,0 +1,66 @@
+<header>
+    <app-common-navbar [publisherNav]=false [customerNav]=false [adminNav]=false></app-common-navbar>
+</header>
+
+<div class="container-fluid back">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <form #registerform="ngForm" (ngSubmit)="publisherRegister()">
+                        <h2 class="text-center mb-5"><b>Register</b></h2>
+                        
+                        <div class="mb-4">
+                            <input type="text" name="pubName" class="form-control" placeholder="Publisher Name"
+                                [(ngModel)]="publisher.pName" required minlength="3" #pubname="ngModel"
+                                [class.is-invalid]="pubname.invalid && pubname.touched" />
+                            <div *ngIf="pubname.invalid && pubname.touched">
+                                <small class="text-danger" *ngIf="pubname.errors?.['required']">This field is required</small>
+                                <small class="text-danger" *ngIf="pubname.errors?.['minlength']">Name must be at least 3 characters long.</small>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <input type="email" name="pubEmail" class="form-control" placeholder="Publisher Email"
+                                [(ngModel)]="publisher.email" required email #pubemail="ngModel"
+                                [class.is-invalid]="pubemail.invalid && pubemail.touched" />
+                            <div *ngIf="pubemail.invalid && pubemail.touched">
+                                <small class="text-danger" *ngIf="pubemail.errors?.['required']">This field is required</small>
+                                <small class="text-danger" *ngIf="pubemail.errors?.['email']">Please enter a valid email</small>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4 position-relative">
+                            <input type="{{ passwordVisible ? 'text' : 'password' }}" name="pubPassword" class="form-control pr-5" placeholder="Publisher Password"
+                                [(ngModel)]="publisher.password" required minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" #pubpassword="ngModel"
+                                [class.is-invalid]="pubpassword.invalid && pubpassword.touched" />
+                            <span class="position-absolute top-50 translate-middle-y text-dark" style="cursor: pointer; right:30px;" (click)="togglePasswordVisibility()">
+                                <i class="fas" [ngClass]="{ 'fa-eye': !passwordVisible, 'fa-eye-slash': passwordVisible }"></i>
+                            </span>
+                            <div *ngIf="pubpassword.invalid && pubpassword.touched">
+                                <small class="text-danger" *ngIf="pubpassword.errors?.['required']">This field is required</small>
+                                <small class="text-danger" *ngIf="pubpassword.errors?.['minlength']">Password must be at least 8 characters long.</small>
+                                <small class="text-danger" *ngIf="pubpassword.errors?.['pattern']">Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.</small>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <select name="pubCountry" class="form-control" [(ngModel)]="publisher.pCountry" required #pubcountry="ngModel"
+                                [class.is-invalid]="pubcountry.invalid && pubcountry.touched">
+                                <option value="" disabled>Select Country</option>
+                                <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+                            </select>
+                            <div *ngIf="pubcountry.invalid && pubcountry.touched">
+                                <small class="text-danger" *ngIf="pubcountry.errors?.['required']">This field is required</small>
+                            </div>
+                        </div>
+                        
+                        <button [disabled]="registerform.form.invalid" type="submit" class="btn btn-primary btn-block">Publisher Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

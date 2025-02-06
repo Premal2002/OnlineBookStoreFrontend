@@ -1,0 +1,29 @@
+/* products */
+  /* Customize product cards */
+  .product-card {
+    max-width: 200px; /* Set max width of product card */
+  }
+  .product-card .card-img-top {
+    height: 170px; /* Set height of product image */
+    object-fit: cover; /* Ensure image covers the entire space */
+  }
+
+  /* Hover effect for product cards */
+.product-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Link style for product images */
+.product-card .card-img-top {
+  cursor: pointer;
+}
+.product-link{
+  text-decoration: none;
+}
+
+.card-title{
+  height: 60px;
+}
+

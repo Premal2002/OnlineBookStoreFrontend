@@ -1,0 +1,79 @@
+<header>
+    <app-common-navbar [publisherNav]="true" [customerNav]="false" [adminNav]="false"></app-common-navbar>
+ </header>
+<div class="container mt-5 mb-5">
+    <h2 class="mb-4">Manage Published Books</h2>
+    <div class="card">
+        <div class="card-header">
+            Published Books
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Book ID</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Img Path</th>
+                        <th scope="col">Modify</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let book of bookList | paginate : {itemsPerPage : count,currentPage : p}">
+                        <td>
+                            <input type="text" class="form-control" [(ngModel)]="book.bId" [readonly]="true">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" [(ngModel)]="book.bTitle" name="bTitle" #bTitle="ngModel" required>
+                            <small *ngIf="bTitle.invalid && (bTitle.dirty || bTitle.touched)" class="text-danger">Title is required.</small>
+                        </td>
+                        <td>
+                            <textarea class="form-control" [(ngModel)]="book.bDesc" name="bDesc" rows="3" cols="30" #bDesc="ngModel" required></textarea>
+                            <small *ngIf="bDesc.invalid && (bDesc.dirty || bDesc.touched)" class="text-danger">Description is required.</small>
+                        </td>
+                        <td>
+                            <select class="form-control" [(ngModel)]="book.bCategory" name="bCategory" #bCategory="ngModel" required>
+                                <option value="{{book.bCategory}}" disabled selected>{{book.bCategory}}</option>
+                                <option value="fiction">Fiction</option>
+                                <option value="non-fiction">Non-Fiction</option>
+                                <option value="childrens">Childrens</option>
+                                <option value="science">Educational</option>
+                                <option value="music">Music</option>
+                                <option value="manga">Manga</option>
+                            </select>
+                            <small *ngIf="bCategory.invalid && (bCategory.dirty || bCategory.touched)" class="text-danger">Category is required.</small>
+                        </td>
+                        <td><input type="text" class="form-control" [(ngModel)]="book.bStatus" [readonly]="true"></td>
+                        <td>
+                            <input type="number" class="form-control" [(ngModel)]="book.bPrice" name="bPrice" #bPrice="ngModel" required min="0" max="2000">
+                            <small *ngIf="(bPrice.invalid && (bPrice.dirty || bPrice.touched)) || (book.bPrice < 0 || book.bPrice > 2000)" class="text-danger">Price must be between 0 and 2000.</small>
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" [(ngModel)]="book.bQuantity" name="bQuantity" #bQuantity="ngModel" required min="5" max="100">
+                            <small *ngIf="(bQuantity.invalid && (bQuantity.dirty || bQuantity.touched)) || (book.bQuantity < 5 || book.bQuantity > 100)" class="text-danger">Quantity must be between 5 and 100.</small>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" [(ngModel)]="book.bImgPath" name="bImgPath" #bImgPath="ngModel" required>
+                            <small *ngIf="bImgPath.invalid && (bImgPath.dirty || bImgPath.touched)" class="text-danger">Image Path is required.</small>
+                        </td>
+                        <td>
+                            <button (click)="modifyBook(book, book.bId)" class="btn btn-primary btn-sm" [disabled]="!bTitle.valid || !bDesc.valid || !bCategory.valid || !bPrice.valid || book.bPrice < 0 || book.bPrice > 2000 || !bQuantity.valid || book.bQuantity < 5 || book.bQuantity > 100 || !bImgPath.valid">Modify</button>
+                        </td>
+                        <td>
+                            <button (click)="deleteBook(book.bId)" class="btn btn-danger btn-sm">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-right">
+            <pagination-controls (pageChange)="p=$event"></pagination-controls>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,66 @@
+<header>
+    <app-common-navbar [publisherNav]=false [customerNav]=false [adminNav]=true></app-common-navbar>
+</header>
+<div class="container mt-5 mb-5">
+    <h2 class="mb-4">Manage Orders</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    Orders
+                </div>
+                <div class="card-body">
+                    <!-- Filter by Is Delivered -->
+                    <div class="form-group">
+                        <label for="filterByDelivered">Filter by Delivered:</label>
+                        <select class="form-control" (change)="filterByDelivered(filterByDeliveredValue)" id="filterByDelivered" [(ngModel)]="filterByDeliveredValue">
+                            <option value="true">Delivered</option>
+                            <option value="false">Not Delivered</option>
+                        </select>
+                    </div>
+                    <!-- Filter between two dates -->
+                    <div class="form-group">
+                        <label for="startDate">Start Date:</label>
+                        <input type="date" (change)="filterByDates()" class="form-control" id="startDate" [(ngModel)]="startDateValue">
+                    </div>
+                    <div class="form-group">
+                        <label for="endDate">End Date:</label>
+                        <input type="date" (change)="filterByDates()" class="form-control" id="endDate" [(ngModel)]="endDateValue">
+                    </div>
+                    <!-- Table -->
+                    <table class="table">
+                        <!-- Table headers -->
+                        <thead>
+                            <tr>
+                                <th scope="col">Order ID</th>
+                                <th scope="col">Customer ID</th>
+                                <th scope="col">Book IDs</th>
+                                <th scope="col">Order Amount</th>
+                                <th scope="col">Order Date</th>
+                                <th scope="col">Is Delivered</th>
+                                <th scope="col">Process Order</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Table body with ngFor and filtering -->
+                            <tr *ngFor="let order of orderList | paginate : {itemsPerPage : count,currentPage : p}">
+                                <!-- Input fields for each order property -->
+                                <td><input type="text" class="form-control" [(ngModel)]="order.orderNo" [readonly]="true"></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="order.cId" [readonly]="true"></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="order.bId" [readonly]="true"></td>
+                                <td><input type="number" class="form-control" [(ngModel)]="order.orderAmount" [readonly]="true"></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="order.orderDate" [readonly]="true"></td>
+                                <td><input type="" class="form-control" [(ngModel)]="order.delivered"[readonly]="true"></td>
+                                <td><button (click)="processOrder(order.orderNo,order.delivered)" class="btn btn-success btn-sm">Process Order</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-right">
+                    <pagination-controls (pageChange)="p=$event"></pagination-controls>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,53 @@
+<header>
+    <app-common-navbar [publisherNav]=false [customerNav]=false [adminNav]=true></app-common-navbar>
+</header>
+<div class="container mt-5 mb-5">
+    <h2 class="mb-4">Manage User Queries</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    User Queries
+                </div>
+                <div class="card-body">
+                    <!-- Filter by Is Active -->
+                    <div class="form-group">
+                        <label for="filterByIsActive">Filter by Is Active:</label>
+                        <select class="form-control" (change)="filterByIsActive(filterByIsActiveValue)" id="filterByIsActive" [(ngModel)]="filterByIsActiveValue">
+                            <option value="true">Resolved</option>
+                            <option value="false">Non Resolved</option>
+                        </select>
+                    </div>
+                    <!-- Table -->
+                    <table class="table">
+                        <!-- Table headers -->
+                        <thead>
+                            <tr>
+                                <th scope="col">Customer Name</th>
+                                <th scope="col">Customer Email</th>
+                                <th scope="col">Customer Query</th>
+                                <th scope="col">Resovled?</th>
+                                <th scope="col">Resolve</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Table body with ngFor and filtering -->
+                            <tr *ngFor="let query of contactList | paginate : {itemsPerPage : count,currentPage : p}">
+                                <!-- Input fields for each query property -->
+                                <td><input type="text" class="form-control" [(ngModel)]="query.contact_name" [readonly]="true"></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="query.contact_email" [readonly]="true"></td>
+                                <td><textarea class="form-control" [(ngModel)]="query.message" [readonly]="true"></textarea></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="query.active" [readonly]="true"></td>
+                                <td><button (click)="resolve(query.contact_id,query.active,query.contact_name)" class="btn btn-danger btn-sm">Resolve</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-right">
+                    <pagination-controls (pageChange)="p=$event"></pagination-controls>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

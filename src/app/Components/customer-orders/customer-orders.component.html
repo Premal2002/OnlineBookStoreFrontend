@@ -1,0 +1,47 @@
+<header>
+    <app-common-navbar [publisherNav]=false [customerNav]=true [adminNav]=false></app-common-navbar>
+</header>
+
+<div *ngIf="isOList" class="container">
+    <h1>Your Orders</h1>
+    <div class="table-responsive">
+        <table class="table">
+            <tbody>
+                <ng-container *ngFor="let order of oList">
+
+                    <tr *ngFor="let bId of order.bId; let i = index " class="order-row">
+                        <td>
+                            <img src="{{ order.bImgpath[i] }}" alt="Book Image" width="60px">
+                        </td>
+                        <td>{{ order.bTitle[i] }}</td>
+                        <td>{{ order.bPrice[i] }}</td>
+                        <td>{{ order.orderDate }}</td>
+                        <td>
+                            <ng-container *ngIf="order.delivered; else notDelivered">
+                                <p class="delivery-status">Delivered</p>
+                            </ng-container>
+                            <ng-template #notDelivered>
+                                <p class="delivery-status1">Not Delivered yet</p>
+                            </ng-template>
+                        </td>
+                    </tr>
+                    
+                    
+                </ng-container>
+            </tbody>
+        </table>
+        
+    </div>
+</div>
+
+<div *ngIf="!isOList" class="container">
+    <div class="empty-cart">
+        <img src="https://assets.materialup.com/uploads/c49f60e7-655f-4ddd-bf29-7e702828d651/preview.png" alt="Empty Cart Image" width="200px">
+        <h2>Your orders are empty</h2>
+        <p>It seems like you haven't added any items to your orders.</p>
+        <button class="btn btn-primary" (click)="goToCart()">Go to Cart</button>
+    </div>
+</div>
+
+
+<app-footer></app-footer>

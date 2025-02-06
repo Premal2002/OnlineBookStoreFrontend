@@ -1,0 +1,19 @@
+.dashboard-section {
+  margin-bottom: 30px;
+}
+.count-section {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+}
+.count-section h5 {
+  margin-bottom: 10px;
+}
+.operation-btn {
+  margin-bottom: 20px;
+  font-size: 1.2rem; /* Increase button font size */
+  padding: 20px; /* Increase button padding */
+}
+.graph-section {
+  margin-top: 50px;
+}

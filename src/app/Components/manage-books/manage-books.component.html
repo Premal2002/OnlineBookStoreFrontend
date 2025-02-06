@@ -1,0 +1,91 @@
+<header>
+    <app-common-navbar [publisherNav]=true [customerNav]=false [adminNav]=false></app-common-navbar>
+</header>
+<div class="container mt-5 mb-5">
+    <h2 class="mb-4">Manage Books</h2>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card mb-3">
+                <div class="card-header">Filters</div>
+                <div class="card-body">
+                    <!-- Filter by ID -->
+                    <div class="form-group">
+                        <label for="filterByIdInput">ID:</label>
+                        <input type="text" class="form-control" id="filterByIdInput" [(ngModel)]="filterByIdValue">
+                        <label><input type="checkbox" (change)="filterById()"> Filter by ID</label><br>
+                    </div>
+                    <!-- Filter by Category -->
+                    <div class="form-group">
+                        <label for="filterByCategoryInput">Category:</label>
+                        <select class="form-control" id="bCategory" [(ngModel)]="filterByCategoryValue" name="bCategory" required>
+                            <option value="" disabled selected>Select Category</option>
+                            <option value="fiction">Fiction</option>
+                            <option value="non-fiction">Non-Fiction</option>
+                            <option value="childrens">Childrens</option>
+                            <option value="educational">Educational</option>
+                            <option value="music">Music</option>
+                            <option value="manga">Manga</option>
+                          </select>
+                        <label><input type="checkbox" (change)="filterByCategory()"> Filter by Category</label><br>
+                    </div>
+                    <!-- Filter by Status -->
+                    <div class="form-group">
+                        <label for="filterByStatusInput">Status:</label>
+                        <select class="form-control" id="bStatus" [(ngModel)]="filterByStatusValue" name="bStatus" required>
+                            <option value="" disabled selected>Select Status</option>
+                            <option value="available">Available</option>
+                            <option value="out of stock">Out of Stock</option>
+                          </select>
+                        <label><input type="checkbox" (change)="filterByStatus()"> Filter by Status</label><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header">
+                    Published Books
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <!-- Table headers -->
+                        <thead>
+                            <tr>
+                                <th scope="col">Book ID</th>
+                                <th scope="col">Publisher ID</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Books Sold</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Table body with ngFor -->
+                            <tr *ngFor="let book of bookList | paginate : {itemsPerPage : count,currentPage : p}">
+                                <!-- Input fields for each book property -->
+                                <td><input type="text" class="form-control" [(ngModel)]="book.bId" [readonly]="true"></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="book.pId" [readonly]="true"></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="book.bTitle"></td>
+                                <td><textarea class="form-control" [(ngModel)]="book.bDesc" rows="3" cols="30"></textarea></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="book.bCategory"></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="book.bStatus" readonly></td>
+                                <td><input type="number" class="form-control" [(ngModel)]="book.bPrice"></td>
+                                <td><input type="number" class="form-control" [(ngModel)]="book.bQuantity"></td>
+                                <td><input type="text" class="form-control" [(ngModel)]="book.booksSold" readonly></td>
+                                <td><button (click)="deleteBook(book.bId,book.pId)" class="btn btn-danger btn-sm">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-right">
+                    <pagination-controls (pageChange)="p=$event"></pagination-controls>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>
