@@ -68,7 +68,9 @@
         
           <div class="card product-card">
             <a routerLink="/singleBookInfo/{{book.bId}}" class="product-link">
-            <img class="card-img-top" [src]="book.bImgPath" alt="{{ book.title }}">
+            <img class="card-img-top"
+            [src]="book.bImgPath || 'assets/default-book-cover.png'"
+            (error)="onImageError($event)">
             </a>
             <div class="card-body">
               <h5 class="card-title">{{ book.bTitle }}</h5>

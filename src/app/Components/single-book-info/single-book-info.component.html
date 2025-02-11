@@ -11,7 +11,9 @@
           <div class="row no-gutters">
             <div class="col-md-4">
               <div class="book-image">
-                <img class="img-fluid" src="{{book.bImgPath}}" alt="Book Image">
+                <img class="card-img-top"
+                [src]="book.bImgPath || 'assets/default-book-cover.png'"
+                (error)="onImageError($event)">
               </div>
             </div>
             <div class="col-md-8">
@@ -38,7 +40,9 @@
       <div *ngFor="let book of bList | paginate : {itemsPerPage : count,currentPage : p}" class="col-md-2 mb-3">
           <div class="card product-card">
             <button type="button" class="btn btn-link product-link" (click)="navigateToSingleBookInfo(book.bId)">
-              <img class="card-img-top" [src]="book.bImgPath" alt="{{ book.title }}">
+              <img class="card-img-top"
+                [src]="book.bImgPath || 'assets/default-book-cover.png'"
+                (error)="onImageError($event)">
             </button>
             <div class="card-body">
               <h5 class="card-title">{{ book.bTitle }}</h5>

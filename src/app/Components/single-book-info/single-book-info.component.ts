@@ -103,4 +103,9 @@ export class SingleBookInfoComponent implements OnInit {
       this.router.navigate(['singleBookInfo',bId]);
     });
   }
+
+  onImageError(event: Event) {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = '../../../assets/default-book-cover.png'; // Set default image on error
+  }
 }

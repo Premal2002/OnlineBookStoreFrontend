@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit,AfterViewInit {
 
   //Book List
   bList : any;
-
+  
   currentCategory : string = "All Books";
 
 
@@ -149,6 +149,12 @@ export class DashboardComponent implements OnInit,AfterViewInit {
     });
   }
   }
+
+  onImageError(event: Event) {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = '../../../assets/default-book-cover.png'; // Set default image on error
+  }
+  
 }
 
 
