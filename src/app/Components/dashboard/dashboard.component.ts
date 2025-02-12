@@ -34,7 +34,14 @@ export class DashboardComponent implements OnInit,AfterViewInit {
   constructor( public hardcodeAuthenticationService: HardcodeAuthenticationService, private route: ActivatedRoute, private router: Router,private bookService : BookService,private customerService : CustomerService) { }
   
   ngOnInit(): void { 
+    this.load();  
+  }
 
+  ngAfterViewInit(): void {
+    
+  }
+
+  load(){
     let query = this.route.snapshot.params['cID'];
     if(this.containsOnlyNumbers(query)==false){
       this.customerService.searchBook(query).subscribe((data:any)=>{
@@ -71,10 +78,6 @@ export class DashboardComponent implements OnInit,AfterViewInit {
       }
     });
     }
-  }
-
-  ngAfterViewInit(): void {
-    
   }
 
  containsOnlyNumbers(input: string): boolean {
@@ -153,6 +156,10 @@ export class DashboardComponent implements OnInit,AfterViewInit {
   onImageError(event: Event) {
     const imgElement = event.target as HTMLImageElement;
     imgElement.src = '../../../assets/default-book-cover.png'; // Set default image on error
+  }
+
+  refreshPage(){
+    this.load();
   }
   
 }
