@@ -158,9 +158,9 @@ export class DashboardComponent implements OnInit,AfterViewInit {
     imgElement.src = '../../../assets/default-book-cover.png'; // Set default image on error
   }
 
-  refreshPage(){
-    this.load();
-  }
+  // refreshPage(){
+  //   this.load();
+  // }
   
 }
 

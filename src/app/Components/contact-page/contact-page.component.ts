@@ -3,11 +3,21 @@ import { Router } from '@angular/router';
 import { CustomerService } from '../../Services/customer-service.service';
 import { Contact } from '../../contact';
 import Swal from 'sweetalert2';
+import { trigger, style, animate, transition } from '@angular/animations';
+
 
 @Component({
   selector: 'app-contact-page',
   templateUrl: './contact-page.component.html',
-  styleUrl: './contact-page.component.css'
+  styleUrl: './contact-page.component.css' ,
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(20px)' }),
+        animate('1s ease-in-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
+    ])
+  ]
 })
 export class ContactPageComponent implements OnInit {
 

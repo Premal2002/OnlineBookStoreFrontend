@@ -1,4 +1,4 @@
-import { Component,Input } from '@angular/core';
+import { Component, Input, HostBinding } from '@angular/core';
 import { Router } from '@angular/router';
 import { HardcodeAuthenticationService } from '../../Services/harcode-authentication.service';
 import { CustomerService } from '../../Services/customer-service.service';
@@ -6,27 +6,33 @@ import { CustomerService } from '../../Services/customer-service.service';
 @Component({
   selector: 'app-common-navbar',
   templateUrl: './common-navbar.component.html',
-  styleUrl: './common-navbar.component.css'
+  styleUrls: ['./common-navbar.component.css'],
 })
 export class CommonNavbarComponent {
-  @Input() publisherNav:Boolean;
-  @Input() customerNav:Boolean;
-  @Input() adminNav:Boolean;
+  @Input() publisherNav: boolean;
+  @Input() customerNav: boolean;
+  @Input() adminNav: boolean;
 
-  cId : number = parseInt(sessionStorage.getItem("customerId"));
-  cName : string = sessionStorage.getItem("customerName");
+  cId: number = parseInt(sessionStorage.getItem("customerId"));
+  cName: string = sessionStorage.getItem("customerName");
 
   dropdownOpen: boolean = false;
+  searchQuery: string = "";
 
-  searchQuery : string =""
- 
-  constructor(private router:Router,public hardcodeAuthenticationService:HardcodeAuthenticationService,customerService:CustomerService){}
-  logoutAdmin(){
+  @HostBinding('class.fade-in') fadeIn = true;  // Add animation on load
+
+  constructor(
+    private router: Router,
+    public hardcodeAuthenticationService: HardcodeAuthenticationService,
+    private customerService: CustomerService
+  ) {}
+
+  logoutAdmin() {
     this.hardcodeAuthenticationService.logoutAdmin();
     this.router.navigate(['adminLogin']);
   }
 
-  logoutPublisher(){
+  logoutPublisher() {
     this.hardcodeAuthenticationService.logoutPublisher();
     this.router.navigate(['publisherLogin']);
   }
@@ -35,26 +41,36 @@ export class CommonNavbarComponent {
     this.dropdownOpen = !this.dropdownOpen;
   }
 
-  logout(){
+  logout() {
     this.hardcodeAuthenticationService.logoutCustomer();
     this.router.navigate(['']);
   }
 
-  searchBook(searchQuery:string){
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-      this.router.navigate(['dashboard',searchQuery]);
-    }); 
-  }
-
-  logoClick(){
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-      this.router.navigate(['dashboard',this.cId]);
+  searchBook(searchQuery: string) {
+    this.addAnimation();
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['dashboard', searchQuery]);
     });
   }
 
-  goToHomePage(){
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-      this.router.navigate(['dashboard',this.cId]);
+  logoClick() {
+    this.addAnimation();
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['dashboard', this.cId]);
     });
+  }
+
+  goToHomePage() {
+    this.addAnimation();
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['dashboard', this.cId]);
+    });
+  }
+
+  addAnimation() {
+    this.fadeIn = false;
+    setTimeout(() => {
+      this.fadeIn = true;
+    }, 100);
   }
 }
