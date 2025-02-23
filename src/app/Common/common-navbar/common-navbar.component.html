@@ -1,58 +1,57 @@
-<nav class="navbar navbar-expand-lg navbar-light back">
-    <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-light back animated-navbar">
+  <div class="container-fluid">
       <button class="navbar-brand" (click)="logoClick()" style="background: none; border: none; cursor: pointer;">
-        <img src="../../../assets/logo2.PNG" alt="Books"  height="33px" style="border-radius: 5px;">
-    </button>
-       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-         <span class="navbar-toggler-icon"></span>
-       </button>
-       <div class="collapse navbar-collapse" id="navbarNav">
-        <div *ngIf="customerNav" class="d-flex">
-        <b class="text-white pt-2">Welcome, {{cName}}</b>
-         <ul  class="navbar-nav ml-5">
-           <li class="nav-item">
-            <button type="button" class="btn btn-link text-white" style="text-decoration: none;" (click)="goToHomePage()">Home</button>
-          </li>
-           <li class="nav-item">
-             <a class="nav-link text-white" routerLink="/aboutPage">About</a>
-           </li>
-           <li class="nav-item">
-             <a class="nav-link text-white" routerLink="/contactPage">Contact</a>
-           </li>
-           <!-- <li class="nav-item">
-             <a class="nav-link disabled text-white" href="#" tabindex="-1" aria-disabled="true">Search</a>
-           </li> -->
-         </ul>
-        </div>  
-         <form *ngIf="customerNav" class="d-flex ms-auto" #searchForm="ngForm" (ngSubmit)="searchBook(searchQuery)">
-          <input class="form-control me-2" type="search" name="searchQuery" [(ngModel)]="searchQuery" placeholder="Search" aria-label="Search" required #searchQueryInput="ngModel">
-          <button class="btn btn-outline-success text-white bg-info" type="submit" [disabled]="searchForm.invalid">Search</button>
-          <!-- <div *ngIf="searchQueryInput.invalid && searchQueryInput.touched" class="text-danger">Search query is required.</div> -->
-        </form>
-         <ul *ngIf="customerNav" class="navbar-nav ms-auto">
-          <li class="nav-item dropdown" (click)="toggleDropdown()">
-              <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" [class.show]="dropdownOpen" data-bs-toggle="dropdown" aria-expanded="false">
-                  Profile
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" [class.show]="dropdownOpen">
-                  <li><a class="dropdown-item" routerLink="/customerProfile">My Profile</a></li>
-                  <li><a class="dropdown-item" routerLink="/customerCart">Your Cart</a></li>
-                  <li><a class="dropdown-item" routerLink="/customerOrders">Your Orders</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li>
-                    <button class="btn btn-link dropdown-item" type="button" (click)="logout()">Logout</button>
+          <img src="../../../assets/logo2.PNG" alt="Books" height="33px" style="border-radius: 5px;">
+      </button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+          <div *ngIf="customerNav" class="d-flex">
+              <b class="text-white pt-2">Welcome, {{cName}}</b>
+              <ul class="navbar-nav ml-5">
+                  <li class="nav-item">
+                      <button type="button" class="btn btn-link text-white nav-button" 
+                              (click)="goToHomePage()">Home</button>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link text-white nav-button" routerLink="/aboutPage">About</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link text-white nav-button" routerLink="/contactPage">Contact</a>
                   </li>
               </ul>
-          </li>
-      </ul>
-      
-
-         <ul *ngIf="publisherNav" class="navbar-nav navbar-collapse justify-content-end">
-          <button (click)="logoutPublisher()" class="btn btn-secondary" type="button">Publisher Logout</button>            
-      </ul>
-      <ul *ngIf="adminNav" class="navbar-nav navbar-collapse justify-content-end">
-        <button (click)="logoutAdmin()" class="btn btn-secondary" type="button">Admin Logout</button>            
-    </ul>
-       </div>
-    </div>
-   </nav>
+          </div>  
+          <form *ngIf="customerNav" class="d-flex ms-auto" #searchForm="ngForm" (ngSubmit)="searchBook(searchQuery)">
+              <input class="form-control me-2" type="search" name="searchQuery" [(ngModel)]="searchQuery" 
+                     placeholder="Search" aria-label="Search" required #searchQueryInput="ngModel">
+              <button class="btn btn-outline-success text-white bg-info" type="submit" 
+                      [disabled]="searchForm.invalid">Search</button>
+          </form>
+          <ul *ngIf="customerNav" class="navbar-nav ms-auto">
+              <li class="nav-item dropdown" (click)="toggleDropdown()">
+                  <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" 
+                     role="button" [class.show]="dropdownOpen" data-bs-toggle="dropdown" 
+                     aria-expanded="false">Profile</a>
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" 
+                      [class.show]="dropdownOpen">
+                      <li><a class="dropdown-item" routerLink="/customerProfile">My Profile</a></li>
+                      <li><a class="dropdown-item" routerLink="/customerCart">Your Cart</a></li>
+                      <li><a class="dropdown-item" routerLink="/customerOrders">Your Orders</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li>
+                          <button class="btn btn-link dropdown-item" type="button" (click)="logout()">Logout</button>
+                      </li>
+                  </ul>
+              </li>
+          </ul>
+          <ul *ngIf="publisherNav" class="navbar-nav navbar-collapse justify-content-end">
+              <button (click)="logoutPublisher()" class="btn btn-secondary" type="button">Publisher Logout</button>            
+          </ul>
+          <ul *ngIf="adminNav" class="navbar-nav navbar-collapse justify-content-end">
+              <button (click)="logoutAdmin()" class="btn btn-secondary" type="button">Admin Logout</button>            
+          </ul>
+      </div>
+  </div>
+</nav>
