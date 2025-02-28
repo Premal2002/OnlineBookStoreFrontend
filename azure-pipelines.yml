@@ -29,18 +29,18 @@ steps:
       git fetch origin main --depth=1
 
       echo "🔹 Checking out and ensuring 'main' branch exists..."
-      git rev-parse --verify main || git checkout -b main origin/main
-      git checkout main
+      git checkout main 2>nul || git checkout -b main origin/main
       git pull origin main --ff-only
 
       echo "🔹 Configuring GitHub remote..."
-      if git remote get-url external &>/dev/null; then
-        echo "✅ External remote already exists. Updating..."
-        git remote set-url external https://$(GITHUB_PAT)@github.com/Premal2002/OnlineBookStoreFrontend.git
-      else
+      git remote -v | findstr /C:"external" > nul
+      if %errorlevel% neq 0 (
         echo "✅ Adding external GitHub remote..."
         git remote add external https://$(GITHUB_PAT)@github.com/Premal2002/OnlineBookStoreFrontend.git
-      fi
+      ) else (
+        echo "✅ External remote already exists. Updating..."
+        git remote set-url external https://$(GITHUB_PAT)@github.com/Premal2002/OnlineBookStoreFrontend.git
+      )
 
       echo "🔹 Pushing to external GitHub repository..."
       git push external main --force
