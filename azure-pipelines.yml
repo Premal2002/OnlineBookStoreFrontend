@@ -21,10 +21,14 @@ steps:
       git config --global user.name "Azure DevOps"
 
       echo "🔹 Checking for ongoing rebase..."
-      if [ -d ".git/rebase-merge" ] || [ -d ".git/rebase-apply" ]; then
+      if exist ".git\rebase-merge" (
           echo "🔹 Aborting previous rebase..."
           git rebase --abort
-      fi
+      )
+      if exist ".git\rebase-apply" (
+          echo "🔹 Aborting previous rebase..."
+          git rebase --abort
+      )
 
       echo "🔹 Fetching latest changes from origin..."
       git fetch --all --prune
@@ -33,16 +37,17 @@ steps:
       git checkout main
 
       echo "🔹 Pulling latest changes from origin..."
-      git pull --rebase origin main || (git reset --hard origin/main)
+      git pull --rebase origin main || git reset --hard origin/main
 
       echo "🔹 Ensuring external GitHub remote is set up..."
-      if git remote get-url external >/dev/null 2>&1; then
-          echo "🔹 External remote already exists. Updating URL..."
-          git remote set-url external https://$(GITHUB_PAT)@github.com/Premal2002/OnlineBookStoreFrontend.git
-      else
+      git remote get-url external >nul 2>&1
+      if %errorlevel% neq 0 (
           echo "🔹 Adding external GitHub remote..."
           git remote add external https://$(GITHUB_PAT)@github.com/Premal2002/OnlineBookStoreFrontend.git
-      fi
+      ) else (
+          echo "🔹 External remote already exists. Updating URL..."
+          git remote set-url external https://$(GITHUB_PAT)@github.com/Premal2002/OnlineBookStoreFrontend.git
+      )
 
       echo "🔹 Fetching latest from external GitHub repo..."
       git fetch external --prune
