@@ -1,0 +1,40 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pr:
+  branches:
+    include:
+      - main
+
+# ✅ Use Self-Hosted Agent Pool
+pool:
+  name: 'SelfHostedPool'  # Replace with your actual agent pool name
+  demands:
+    - agent.name -equals DESKTOP-0DTLUPK  # (Optional) Replace with your agent name
+
+steps:
+  # ✅ Checkout the repository with credentials persisted
+  - checkout: self
+    persistCredentials: true
+
+  # ✅ Configure Git User Information
+  - script: |
+      echo "Setting up Git user config..."
+      git config --global user.email "your-email@example.com"
+      git config --global user.name "Azure DevOps"
+
+      echo "Fetching latest changes..."
+      git fetch origin main
+
+      echo "Checking current branch..."
+      git branch --show-current
+
+      echo "Adding GitHub remote..."
+      git remote remove external 2>nul || echo "No existing external remote"
+      git remote add external https://$(GITHUB_PAT)@github.com/Premal2002/OnlineBookStoreFrontend.git
+      echo "Pushing to external GitHub repository..."
+      git push external main --force
+
+    displayName: 'Push changes to external Git repository'
