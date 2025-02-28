@@ -37,5 +37,5 @@ steps:
       git push external main --force
 
     displayName: 'Pull and Push changes to external Git repository'
-
-
+    env:
+      GITHUB_PAT: $(GITHUB_PAT)  # 🔹 Using the stored PAT from pipeline variables
