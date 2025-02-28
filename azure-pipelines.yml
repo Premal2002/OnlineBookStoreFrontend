@@ -12,29 +12,37 @@ pr:
 pool:
   name: 'SelfHostedPool'  # Replace with your actual agent pool name
   demands:
-    - agent.name -equals DESKTOP-0DTLUPK  # (Optional) Replace with your agent name
+    - agent.name -equals DESKTOP-0DTLUPK  # Replace with your agent name
 
 steps:
   # ✅ Checkout the repository with credentials persisted
   - checkout: self
     persistCredentials: true
 
-  # ✅ Configure Git User Information
+  # ✅ Ensure correct Git branch and push changes to external repo
   - script: |
-      echo "Setting up Git user config..."
+      echo "🔹 Setting up Git user config..."
       git config --global user.email "your-email@example.com"
       git config --global user.name "Azure DevOps"
 
-      echo "Fetching latest changes..."
-      git fetch origin main
+      echo "🔹 Fetching latest changes from origin..."
+      git fetch origin main --depth=1
 
-      echo "Checking current branch..."
-      git branch --show-current
+      echo "🔹 Checking out and ensuring 'main' branch exists..."
+      git rev-parse --verify main || git checkout -b main origin/main
+      git checkout main
+      git pull origin main --ff-only
 
-      echo "Adding GitHub remote..."
-      git remote remove external 2>nul || echo "No existing external remote"
-      git remote add external https://$(GITHUB_PAT)@github.com/Premal2002/OnlineBookStoreFrontend.git
-      echo "Pushing to external GitHub repository..."
+      echo "🔹 Configuring GitHub remote..."
+      if git remote get-url external &>/dev/null; then
+        echo "✅ External remote already exists. Updating..."
+        git remote set-url external https://$(GITHUB_PAT)@github.com/Premal2002/OnlineBookStoreFrontend.git
+      else
+        echo "✅ Adding external GitHub remote..."
+        git remote add external https://$(GITHUB_PAT)@github.com/Premal2002/OnlineBookStoreFrontend.git
+      fi
+
+      echo "🔹 Pushing to external GitHub repository..."
       git push external main --force
 
     displayName: 'Push changes to external Git repository'
