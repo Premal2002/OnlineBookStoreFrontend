@@ -20,6 +20,12 @@ steps:
       git config --global user.email "your-email@example.com"
       git config --global user.name "Azure DevOps"
 
+      echo "🔹 Checking for ongoing rebase..."
+      if [ -d ".git/rebase-merge" ] || [ -d ".git/rebase-apply" ]; then
+          echo "🔹 Aborting previous rebase..."
+          git rebase --abort
+      fi
+
       echo "🔹 Fetching latest changes from origin..."
       git fetch --all --prune
 
@@ -30,12 +36,18 @@ steps:
       git pull --rebase origin main || (git reset --hard origin/main)
 
       echo "🔹 Ensuring external GitHub remote is set up..."
-      git remote remove external 2>/dev/null || echo "No previous external remote."
-      git remote add external https://$(GITHUB_PAT)@github.com/Premal2002/OnlineBookStoreFrontend.git
+      if git remote get-url external >/dev/null 2>&1; then
+          echo "🔹 External remote already exists. Updating URL..."
+          git remote set-url external https://$(GITHUB_PAT)@github.com/Premal2002/OnlineBookStoreFrontend.git
+      else
+          echo "🔹 Adding external GitHub remote..."
+          git remote add external https://$(GITHUB_PAT)@github.com/Premal2002/OnlineBookStoreFrontend.git
+      fi
 
-      echo "🔹 Pushing changes to external GitHub repository..."
+      echo "🔹 Fetching latest from external GitHub repo..."
+      git fetch external --prune
+
+      echo "🔹 Forcing push to external GitHub repository..."
       git push external main --force
 
     displayName: 'Pull and Push changes to external Git repository'
-    env:
-      GITHUB_PAT: $(GITHUB_PAT)  # 🔹 Using the stored PAT from pipeline variables
