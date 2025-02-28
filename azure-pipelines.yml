@@ -8,18 +8,13 @@ pr:
     include:
       - main
 
-# ✅ Use Self-Hosted Agent Pool
 pool:
-  name: 'SelfHostedPool'  # Replace with your actual agent pool name
-  demands:
-    - agent.name -equals DESKTOP-0DTLUPK  # Replace with your agent name
+  name: 'SelfHostedPool'  # 🔹 Replace with your actual self-hosted agent pool name
 
 steps:
-  # ✅ Checkout the repository with credentials persisted
   - checkout: self
     persistCredentials: true
 
-  # ✅ Ensure correct Git branch and push changes to external repo
   - script: |
       echo "🔹 Setting up Git user config..."
       git config --global user.email "your-email@example.com"
@@ -30,7 +25,15 @@ steps:
 
       echo "🔹 Checking out and ensuring 'main' branch exists..."
       git checkout main 2>nul || git checkout -b main origin/main
-      git pull origin main --ff-only
+
+      echo "🔹 Merging latest changes to resolve divergence..."
+      git merge origin/main --no-edit || (
+        echo "⚠️ Merge conflict detected, attempting rebase..."
+        git rebase origin/main || (
+          echo "❌ Automatic rebase failed. Please resolve conflicts manually."
+          exit /b 1
+        )
+      )
 
       echo "🔹 Configuring GitHub remote..."
       git remote -v | findstr /C:"external" > nul
@@ -43,6 +46,9 @@ steps:
       )
 
       echo "🔹 Pushing to external GitHub repository..."
-      git push external main --force
+      git push external main || (
+        echo "⚠️ Push failed. Trying force push..."
+        git push external main --force
+      )
 
     displayName: 'Push changes to external Git repository'
