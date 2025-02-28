@@ -21,21 +21,13 @@ steps:
       git config --global user.name "Azure DevOps"
 
       echo "🔹 Fetching latest changes from origin..."
-      git fetch origin main --depth=1
+      git fetch --all --prune
 
-      echo "🔹 Checking out and ensuring 'main' branch exists..."
-      git checkout main 2>nul || git checkout -b main origin/main
+      echo "🔹 Resetting branch to match remote..."
+      git checkout main
+      git reset --hard origin/main  # 🔹 Forces local branch to match Azure's version
 
-      echo "🔹 Merging latest changes to resolve divergence..."
-      git merge origin/main --no-edit || (
-        echo "⚠️ Merge conflict detected, attempting rebase..."
-        git rebase origin/main || (
-          echo "❌ Automatic rebase failed. Please resolve conflicts manually."
-          exit /b 1
-        )
-      )
-
-      echo "🔹 Configuring GitHub remote..."
+      echo "🔹 Configuring external GitHub remote..."
       git remote -v | findstr /C:"external" > nul
       if %errorlevel% neq 0 (
         echo "✅ Adding external GitHub remote..."
@@ -46,9 +38,7 @@ steps:
       )
 
       echo "🔹 Pushing to external GitHub repository..."
-      git push external main || (
-        echo "⚠️ Push failed. Trying force push..."
-        git push external main --force
-      )
+      git push external main --force  # 🔹 Force push to overwrite any conflicts
 
     displayName: 'Push changes to external Git repository'
+
