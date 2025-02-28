@@ -23,22 +23,19 @@ steps:
       echo "🔹 Fetching latest changes from origin..."
       git fetch --all --prune
 
-      echo "🔹 Resetting branch to match remote..."
+      echo "🔹 Checking out 'main' branch..."
       git checkout main
-      git reset --hard origin/main  # 🔹 Forces local branch to match Azure's version
 
-      echo "🔹 Configuring external GitHub remote..."
-      git remote -v | findstr /C:"external" > nul
-      if %errorlevel% neq 0 (
-        echo "✅ Adding external GitHub remote..."
-        git remote add external https://$(GITHUB_PAT)@github.com/Premal2002/OnlineBookStoreFrontend.git
-      ) else (
-        echo "✅ External remote already exists. Updating..."
-        git remote set-url external https://$(GITHUB_PAT)@github.com/Premal2002/OnlineBookStoreFrontend.git
-      )
+      echo "🔹 Pulling latest changes from origin..."
+      git pull --rebase origin main || (git reset --hard origin/main)
 
-      echo "🔹 Pushing to external GitHub repository..."
-      git push external main --force  # 🔹 Force push to overwrite any conflicts
+      echo "🔹 Ensuring external GitHub remote is set up..."
+      git remote remove external 2>/dev/null || echo "No previous external remote."
+      git remote add external https://$(GITHUB_PAT)@github.com/Premal2002/OnlineBookStoreFrontend.git
 
-    displayName: 'Push changes to external Git repository'
+      echo "🔹 Pushing changes to external GitHub repository..."
+      git push external main --force
+
+    displayName: 'Pull and Push changes to external Git repository'
+
 
