@@ -49,8 +49,8 @@
             </div>
             <div class="form-group">
               <label for="bImgPath">Image Path</label>
-              <input type="text" class="form-control" id="bImgPath" name="bImgPath" [(ngModel)]="book.bImgPath" placeholder="Enter Image Path" required>
-              <small *ngIf="bookForm.controls['bImgPath'].invalid && bookForm.controls['bImgPath'].touched" class="text-danger">Image Path is required.</small>
+              <input type="text" class="form-control" id="bImgPath" name="bImgPath" [(ngModel)]="book.bImgPath" placeholder="Enter Image Path" required maxlength="2048">
+              <small *ngIf="bookForm.controls['bImgPath'].invalid && bookForm.controls['bImgPath'].touched" class="text-danger">Image Path is required and must not exceed 2048 characters.</small>
             </div>
             <button type="submit" class="btn btn-warning btn-block" [disabled]="!bookForm.form.valid">Publish</button>
           </form>
