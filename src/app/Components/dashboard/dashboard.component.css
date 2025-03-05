@@ -69,3 +69,104 @@
 .card-title{
   height: 60px;
 }
+
+/* Different background colors for each book category */
+.fiction {
+  background-color: #f9fafb; /* Light Blue */
+}
+
+.non-fiction {
+  background-color: #fbfcfb; /* Light Green */
+}
+
+.children {
+  background-color: #fbfbfa; /* Gold */
+}
+
+.education {
+  background-color: #f8f6f8; /* Thistle */
+}
+
+.manga {
+  background-color: #efeded; /* Light Pink */
+}
+
+.music {
+  background-color: #f6f5f3; /* Orange */
+}
+
+.all-books {
+  background-color: #fdf8f8; /* Light Gray */
+}
+
+/* Remove default white background */
+.product-card {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Ensure text is readable on different backgrounds */
+.product-card .card-title,
+.product-card .card-text {
+  color: #333;
+  font-weight: bold;
+}
+
+/* Maintain image consistency */
+.card-img-top {
+  height: 170px;
+  object-fit: cover;
+}
+
+/* Product card alignment */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Default background */
+.category-background {
+  padding: 20px;
+  transition: background-color 0.5s ease-in-out;
+}
+
+/* Background colors for each category */
+.bg-fiction {
+  background: linear-gradient(to right, #70e1f5, #ffd194); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-non-fiction {
+  background: linear-gradient(to right, #abbaab, #ffffff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-childrens {
+  background: linear-gradient(to right, #feac5e, #c779d0, #4bc0c8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-education {
+  background: linear-gradient(to right, #feac5e, #c779d0, #4bc0c8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-manga {
+  background: linear-gradient(to right, #d3959b, #bfe6ba); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-music {
+  background: linear-gradient(to right, #dad299, #b0dab9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-all-books {
+  background: linear-gradient(to right, #fc354c, #0abfbc); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+/* .container {
+  padding: 0 !important;
+  margin: 0 !important;
+} */

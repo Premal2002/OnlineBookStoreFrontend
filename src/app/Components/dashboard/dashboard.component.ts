@@ -161,8 +161,53 @@ export class DashboardComponent implements OnInit,AfterViewInit {
   // refreshPage(){
   //   this.load();
   // }
+  getCategoryClass(category: string): string {
+    switch (category.toLowerCase()) {
+      case "fiction":
+        return "fiction";
+      case "non-fiction":
+        return "non-fiction";
+      case "childrens":
+        return "childrens";
+      case "education":
+        return "education";
+      case "manga":
+        return "manga";
+      case "music":
+        return "music";
+      case "all books":
+        return "all-books";
+      default:
+        return "";
+    }
+  }
   
+
+  getBackgroundClass(category: string): string {
+    switch (category?.toLowerCase()) {
+      case "fiction":
+        return "bg-fiction";
+      case "non-fiction":
+        return "bg-non-fiction";
+      case "childrens":
+        return "bg-childrens";
+      case "education":
+        return "bg-education";
+      case "manga":
+        return "bg-manga"; // Red-Yellow Gradient
+      case "music":
+        return "bg-music";
+      case "all books":
+        return "bg-all-books";
+      default:
+        return ""; // No background change for unknown categories
+    }
+  }
+  
+
+
 }
+
 
 
 
