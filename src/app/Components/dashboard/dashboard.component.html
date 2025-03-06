@@ -83,7 +83,7 @@
                  (error)="onImageError($event)">
           </a>
           <div class="card-body">
-            <h5 class="card-title">{{ book.bTitle }}</h5>
+            <h5 class="card-title book-title">{{ book.bTitle }}</h5>
             <p class="card-text">{{ book.bPrice }} Rs</p>
             <button (click)="addToCart(book.bId, book.bTitle, book.bDesc, book.bPrice, book.bImgPath, book.bStatus)"
                     type="button" class="btn btn-primary btn-block">
