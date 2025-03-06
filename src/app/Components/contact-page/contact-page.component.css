@@ -2,7 +2,7 @@
   min-height: 86%;
 }
 .back {
-    background: linear-gradient(to bottom right, #FFB0B0, #E0CCBE); /* Gradient colors */
+  background: linear-gradient(to bottom right, #E78895, #19A7CE); 
     color: white; /* Text color */
   }
   .btn{

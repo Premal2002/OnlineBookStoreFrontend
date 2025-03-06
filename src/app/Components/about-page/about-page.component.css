@@ -2,7 +2,8 @@
 .container-fluid {
   min-height: 90%;
   padding: 4rem 3rem;
-  background: linear-gradient(to bottom right, #19A7CE, #146C94); /* Background gradient */
+  /* background: linear-gradient(to bottom right, #19A7CE, #146C94); Background gradient */
+  background: linear-gradient(to bottom right, #E78895, #19A7CE); 
 }
 
 /* Flex container for text and image */

@@ -1,12 +1,14 @@
+<div class="mainbody">
 <header>
     <app-common-navbar [publisherNav]=false [customerNav]=true [adminNav]=false></app-common-navbar>
 </header>
 
-<div class="container mt-4">
+  
+<div class="container mt-5">
   
     <div class="row">
       <div class="col-md-6 offset-md-3">
-        <div class="card">
+        <div class="card details-container">
           <h3>Book Details</h3>
           <div class="row no-gutters">
             <div class="col-md-4">
@@ -34,7 +36,7 @@
   </div>
   <div *ngIf="similarBooks" class="container mt-5 mb-3">
    
-    <h2 class="mb-4">Similar Books</h2>
+    <h2 class="mb-4 text-white">Similar Books</h2>
     <div class="row">
       <!-- Product 1 -->
       <div *ngFor="let book of bList | paginate : {itemsPerPage : count,currentPage : p}" class="col-md-2 mb-3">
@@ -63,3 +65,4 @@
   
 
   <app-footer></app-footer>
+</div>
