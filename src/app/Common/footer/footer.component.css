@@ -1,13 +1,94 @@
 .footer {
-    margin-top: 20px;
-    width: 100%;
-    background-color: #161A30; /* Background color for the footer */
-    padding: 20px; /* Adjust padding as needed */
-    text-align: center; /* Align content to center */
-  }
-
-  
-.container {
-  flex: 1;
+  background: linear-gradient(135deg, #1e1e2f, #3d3d5c);
+  color: white;
+  padding: 40px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.footer-logo h2 {
+  font-size: 28px;
+  font-weight: 600;
+  animation: fadeInDown 1s ease-in-out;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+}
+
+.footer-links li {
+  transition: transform 0.3s ease-in-out;
+}
+
+.footer-links li:hover {
+  transform: scale(1.1);
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  font-size: 18px;
+  transition: color 0.3s ease-in-out;
+}
+
+.footer-links a:hover {
+  color: #BA8E65;
+}
+
+.footer-social {
+  display: flex;
+  gap: 15px;
+}
+
+.footer-social a {
+  color: white;
+  font-size: 20px;
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.footer-social a:hover {
+  color: #BA8E65;
+  transform: translateY(-5px);
+}
+
+.footer-bottom {
+  margin-top: 20px;
+  font-size: 14px;
+  opacity: 0.8;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
