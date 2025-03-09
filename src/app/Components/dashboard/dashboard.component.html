@@ -2,11 +2,9 @@
  <header>
   <app-common-navbar [publisherNav]=false [customerNav]=true [adminNav]=false></app-common-navbar>
 </header>
-
- <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     
-  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2500">
+  <div class="carousel-inner">
       <!-- First slide -->
       <div class="carousel-item active">
         <img class="d-block w-100" src="../../../assets/WhatsApp Image 2024-04-25 at 3.46.53 PM.jpeg" alt="First slide" (click)="findOtherCat('manga')">
@@ -20,11 +18,11 @@
         <img class="d-block w-100" src="../../../assets/WhatsApp Image 2024-04-25 at 3.47.41 PM.jpeg" alt="Third slide" (click)="findOtherCat('music')">
       </div>
     </div>
-    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="sr-only text-white ">Previous</span>
     </a>
-    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
