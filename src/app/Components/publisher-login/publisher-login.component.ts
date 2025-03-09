@@ -64,7 +64,7 @@ export class PublisherLoginComponent implements OnInit{
   }
 
   customerLogin(){
-    this.router.navigate(['']);
+    this.router.navigate(['customerLogin']);
   }
 
   passwordVisible: boolean = false;
