@@ -11,96 +11,126 @@ import { Cart } from '../../cart';
 @Component({
   selector: 'app-single-book-info',
   templateUrl: './single-book-info.component.html',
-  styleUrl: './single-book-info.component.css'
+  styleUrl: './single-book-info.component.css',
 })
 export class SingleBookInfoComponent implements OnInit {
-
-
+  //to check logged in status
+  isLoggedin:boolean = false;
   //pagination
-  p:number=1;
-  count : number = 6;
+  p: number = 1;
+  count: number = 6;
 
   //
-  bId : number; 
-  
-  book : Book = new Book(0,0,"","","","",0,0,"",0);
+  bId: number;
 
-  publisher : Publisher = new Publisher(0,"","","","",false);
+  book: Book = new Book(0, 0, '', '', '', '', 0, 0, '', 0);
 
-  bList : any;
+  publisher: Publisher = new Publisher(0, '', '', '', '', false);
 
-  similarBooks : boolean = false;
+  bList: any;
 
-  constructor(private route : ActivatedRoute,private router : Router, private bookService : BookService,private publisherService : PublisherService,private customerService : CustomerService){}
+  similarBooks: boolean = false;
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private bookService: BookService,
+    private publisherService: PublisherService,
+    private customerService: CustomerService
+  ) {}
 
   ngOnInit(): void {
-      this.bId = this.route.snapshot.params['bId'];
+    let cID: number = parseInt(sessionStorage.getItem('customerId'));
+    if(cID == 0 || cID == null || Number.isNaN(cID)){
+      this.isLoggedin = false;
+    }else{
+        this.isLoggedin = true;
+    }
+    this.bId = this.route.snapshot.params['bId'];
 
-      this.bookService.getBookById(this.bId).subscribe((data:any)=>{
-        if(data!=null){
-          this.book = data;
-          // console.log(this.book);
+    this.bookService.getBookById(this.bId).subscribe((data: any) => {
+      if (data != null) {
+        this.book = data;
+        // console.log(this.book);
 
-          this.publisherService.getPublisherById(this.book.pId).subscribe((data:any)=>{
-            if(data!=null){
+        this.publisherService
+          .getPublisherById(this.book.pId)
+          .subscribe((data: any) => {
+            if (data != null) {
               this.publisher = data;
               // console.log(this. publisher);
             }
           });
 
-          this.bookService.getBooksByCategory(this.book.bCategory,this.book.bId).subscribe((data:any)=>{
-            if(data!=null){
-            this.bList = data;
-            this.similarBooks=(this.bList.length>0);
-            // console.log(this.bList);
-          }  
+        this.bookService
+          .getBooksByCategory(this.book.bCategory, this.book.bId)
+          .subscribe((data: any) => {
+            if (data != null) {
+              this.bList = data;
+              this.similarBooks = this.bList.length > 0;
+              // console.log(this.bList);
+            }
           });
-
-        }else{
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Book Not Found!',
-          });
-        }
-      });  
-  }
-
-  addToCart(bId:number,bTitle:string,bDesc:string,bPrice:number,bImgPath:string,bStatus:string){
-    if(bStatus==="available"){
-    let custId : number = parseInt(sessionStorage.getItem("customerId"));
-    console.log(custId);
-    var cart : Cart=new Cart(0,0,0,"","",0,"");
-    cart.bId=bId;
-    cart.custId=custId;
-    cart.bTitle=bTitle;
-    cart.bDesc=bDesc;
-    cart.bPrice=bPrice;
-    cart.bImgPath=bImgPath;
-
-    this.customerService.addToCart(cart).subscribe((data:any)=>{
-      if(data!=null){
+      } else {
         Swal.fire({
-          icon: 'success',
-          title: 'Success',
-          text: 'Book added to cart',
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Book Not Found!',
         });
-        this.router.navigate(['customerCart']);
       }
     });
-  }else{
-    Swal.fire({
-      icon: 'error',
-      title: 'Failed',
-      text: 'This book is out of stock',
-    });
-  }
   }
 
+  addToCart(
+    bId: number,
+    bTitle: string,
+    bDesc: string,
+    bPrice: number,
+    bImgPath: string,
+    bStatus: string
+  ) {
+    if (!this.isLoggedin) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Warning',
+        text: 'Please Login First',
+      });
+      this.router.navigate(['customerLogin']);
+    } else {
+      if (bStatus === 'available') {
+        let custId: number = parseInt(sessionStorage.getItem('customerId'));
+        console.log(custId);
+        var cart: Cart = new Cart(0, 0, 0, '', '', 0, '');
+        cart.bId = bId;
+        cart.custId = custId;
+        cart.bTitle = bTitle;
+        cart.bDesc = bDesc;
+        cart.bPrice = bPrice;
+        cart.bImgPath = bImgPath;
 
-  navigateToSingleBookInfo(bId:number){
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-      this.router.navigate(['singleBookInfo',bId]);
+        this.customerService.addToCart(cart).subscribe((data: any) => {
+          if (data != null) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: 'Book added to cart',
+            });
+            this.router.navigate(['customerCart']);
+          }
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Failed',
+          text: 'This book is out of stock',
+        });
+      }
+    }
+  }
+
+  navigateToSingleBookInfo(bId: number) {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['singleBookInfo', bId]);
     });
   }
 

@@ -10,7 +10,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
           <div *ngIf="customerNav" class="d-flex">
-              <b class="text-white pt-2">Welcome, {{cName}}</b>
+              <b *ngIf="isLoggedIn" class="text-white pt-2" >Welcome, {{cName}}</b>
               <ul class="navbar-nav ml-5">
                   <li class="nav-item">
                       <button type="button" class="btn btn-link text-white nav-button" 
@@ -30,7 +30,7 @@
               <button class="btn btn-outline-success text-white bg-info" type="submit" 
                       [disabled]="searchForm.invalid">Search</button>
           </form>
-          <ul *ngIf="customerNav" class="navbar-nav ms-auto">
+          <ul *ngIf="customerNav && isLoggedIn" class="navbar-nav ms-auto">
               <li class="nav-item dropdown" (click)="toggleDropdown()">
                   <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" 
                      role="button" [class.show]="dropdownOpen" data-bs-toggle="dropdown" 
