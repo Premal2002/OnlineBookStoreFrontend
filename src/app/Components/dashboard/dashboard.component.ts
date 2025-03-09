@@ -17,6 +17,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   //Logged in check
   isLoggedin: boolean = false;
 
+  //Loding books or data from render initially(for loader)
+  loading: boolean = true; // Initially, show loading
+
   firstName: any = sessionStorage.getItem('customerName');
 
   //Book List
@@ -64,6 +67,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   load() {
     if (this.containsOnlyNumbers(this.query) == false && this.query != 'NaN') {
       this.customerService.searchBook(this.query).subscribe((data: any) => {
+        this.loading = false;
         if (data.length > 0) {
           this.bList = data;
           console;
@@ -79,27 +83,33 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             text: 'Book not found!',
           }).then(() => {
             this.router
-            .navigateByUrl('customerLogin', { skipLocationChange: true })
-            .then(() => {
-              this.router.navigate(['dashboard', cId]);
-            });
+              .navigateByUrl('customerLogin', { skipLocationChange: true })
+              .then(() => {
+                this.router.navigate(['dashboard', cId]);
+              });
           });
         }
       });
     } else {
       //get all books
-      this.bookService.getAllBooks().subscribe((data: any) => {
-        if (data != null) {
-          this.bList = data;
-          // console.log(typeof data);
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'There are no books in store!',
-          });
+      this.bookService.getAllBooks().subscribe(
+        (data: any) => {
+          this.loading = false; // Hide loader once data is received
+
+          if (data != null) {
+            this.bList = data;
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'There are no books in store!',
+            });
+          }
+        },
+        (error) => {
+          this.loading = false; // Hide loader even if there’s an error
         }
-      });
+      );
     }
   }
 
