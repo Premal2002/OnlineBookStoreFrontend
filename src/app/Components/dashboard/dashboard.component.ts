@@ -136,6 +136,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       if (data.length > 0) {
         this.bList = data;
         this.currentCategory = bCategory;
+        this.p = 1;
         this.router.navigate([
           'dashboard',
           sessionStorage.getItem('customerId'),
