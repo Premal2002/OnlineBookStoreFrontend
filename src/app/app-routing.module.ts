@@ -57,7 +57,9 @@ const routes: Routes = [{path:"customerLogin" , component:CustomerLoginComponent
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{
+    scrollPositionRestoration: 'top' // This makes Angular scroll to top on navigation
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
