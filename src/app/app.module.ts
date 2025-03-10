@@ -31,6 +31,7 @@ import { ManageBooksComponent } from './Components/manage-books/manage-books.com
 import { ManageOrdersComponent } from './Components/manage-orders/manage-orders.component';
 import { ManageQueriesComponent } from './Components/manage-queries/manage-queries.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
   
 @NgModule({
@@ -63,6 +64,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ManageQueriesComponent,
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
