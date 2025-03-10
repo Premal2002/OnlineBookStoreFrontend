@@ -138,6 +138,7 @@
 /* Default background */
 .category-background {
   padding: 20px;
+  background: linear-gradient(to right, #6190e8, #a7bfe8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   transition: background-color 0.5s ease-in-out;
 }
 
@@ -154,7 +155,7 @@
   background: linear-gradient(to right, #feac5e, #c779d0, #4bc0c8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.bg-education {
+.bg-educational {
   background: linear-gradient(to right, #feac5e, #c779d0, #4bc0c8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
@@ -189,3 +190,5 @@
   word-break: break-word;
   text-align: center;
 }
+
+

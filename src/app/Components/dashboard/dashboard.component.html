@@ -74,13 +74,11 @@
     </div>
   
     <!-- Products Grid -->
-    <div class="row">
+    <div class="row" [@booksAnimation]="bList.length">
       <div *ngFor="let book of bList | paginate : { itemsPerPage: count, currentPage: p }" class="col-md-2 mb-3">
-        <div class="card product-card"[ngClass]="getCategoryClass(book.bCategory)">
+        <div class="card product-card" [ngClass]="getCategoryClass(currentCategory)">
           <a routerLink="/singleBookInfo/{{ book.bId }}" class="product-link">
-            <img class="card-img-top"
-                 [src]="book.bImgPath || 'assets/default-book-cover.png'"
-                 (error)="onImageError($event)">
+            <img class="card-img-top" [src]="book.bImgPath || 'assets/default-book-cover.png'" (error)="onImageError($event)">
           </a>
           <div class="card-body">
             <h5 class="card-title book-title">{{ book.bTitle }}</h5>
