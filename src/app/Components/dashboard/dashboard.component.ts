@@ -58,11 +58,11 @@ import {
     trigger('fadeAnimation', [
       transition(':increment', [
         style({ opacity: 0, transform: 'translateX(100px)' }),
-        animate('400ms ease-in-out', style({ opacity: 1, transform: 'translateX(0)' }))
+        animate('1000ms ease-in-out', style({ opacity: 1, transform: 'translateX(0)' }))
       ]),
       transition(':decrement', [
         style({ opacity: 0, transform: 'translateX(-100px)' }),
-        animate('400ms ease-in-out', style({ opacity: 1, transform: 'translateX(0)' }))
+        animate('1000ms ease-in-out', style({ opacity: 1, transform: 'translateX(0)' }))
       ])
     ])
   ],
