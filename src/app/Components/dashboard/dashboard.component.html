@@ -98,7 +98,7 @@
   </div>
 
   <!-- Products Grid -->
-  <div *ngIf="!loading" class="row" [@booksAnimation]="bList.length">
+  <div  *ngIf="!loading" class="row" [@booksAnimation]="bList.length" [@fadeAnimation]="p">
     <div *ngFor="
         let book of bList | paginate : { itemsPerPage: count, currentPage: p }
       " class="col-md-2 mb-3">

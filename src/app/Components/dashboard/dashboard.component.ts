@@ -55,11 +55,23 @@ import {
         ),
       ]),
     ]),
+    trigger('fadeAnimation', [
+      transition(':increment', [
+        style({ opacity: 0, transform: 'translateX(100px)' }),
+        animate('1000ms ease-in-out', style({ opacity: 1, transform: 'translateX(0)' }))
+      ]),
+      transition(':decrement', [
+        style({ opacity: 0, transform: 'translateX(-100px)' }),
+        animate('1000ms ease-in-out', style({ opacity: 1, transform: 'translateX(0)' }))
+      ])
+    ])
   ],
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
   //Logged in check
   isLoggedin: boolean = false;
+  isFading: boolean = false; // Controls fade-in/out effect
+
 
   //Loding books or data from render initially(for loader)
   loading: boolean = true; // Initially, show loading
@@ -307,4 +319,27 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         return ''; // No background change for unknown categories
     }
   }
+  changePage(page: number) {
+    if (page === this.p) return; // Prevent redundant page reload
+  
+    this.bList = [...this.bList]; // Force change detection
+    this.p = page; // Update page number
+  
+    setTimeout(() => {
+      if (this.currentCategory === 'All Books') {
+        this.bookService.getAllBooks().subscribe((data: any) => {
+          this.bList = data; // Load books after delay
+        });
+      } else {
+        this.bookService.findBooksByCategory(this.currentCategory).subscribe((data: any) => {
+          this.bList = data; // Load category books after delay
+        });
+      }
+    }, 300); // Ensure smooth transition
+  }
+  
+  
+  
+  
+  
 }
