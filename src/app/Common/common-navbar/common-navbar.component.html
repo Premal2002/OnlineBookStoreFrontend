@@ -1,20 +1,21 @@
 <!-- This is common navbar v6 -->
-<nav class="navbar navbar-expand-lg navbar-light back animated-navbar">
+<nav class="navbar navbar-expand-lg navbar-dark back animated-navbar">
   <div class="container-fluid">
       <button class="navbar-brand" (click)="logoClick()" style="background: none; border: none; cursor: pointer;">
           <img src="../../../assets/logo2.PNG" alt="Books" height="33px" style="border-radius: 5px;">
       </button>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-          <div *ngIf="customerNav" class="d-flex">
-              <b *ngIf="isLoggedIn" class="text-white pt-2" >Welcome, {{cName}}</b>
+      <div class="collapse navbar-collapse text-center justify-content-center w-100" id="navbarNav">
+        <div *ngIf="customerNav" class="">
               <ul class="navbar-nav ml-5">
+                <li li class="nav-item">
+                    <b *ngIf="isLoggedIn" class="nav-link text-white nav-button text-center" >Welcome, {{cName}}</b>
+                </li>
                   <li class="nav-item">
-                      <button type="button" class="btn btn-link text-white nav-button" 
-                              (click)="goToHomePage()">Home</button>
+                    <a role="button" class="nav-link text-white nav-button text-center" (click)="goToHomePage()">Home</a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link text-white nav-button" routerLink="/aboutPage">About</a>
