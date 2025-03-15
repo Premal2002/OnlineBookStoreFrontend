@@ -33,48 +33,35 @@
 
 <!-- Navigation Bar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+  <button class="navbar-toggler ms-2" type="button" data-toggle="collapse" data-target="#navbarNav1" aria-controls="navbarNav1"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+  <div class="collapse navbar-collapse justify-content-center" id="navbarNav1">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <button class="nav-link btn btn-link" (click)="allBooksCat()">
-          All Books
-        </button>
+          <a role="button" class="nav-link btn btn-link" (click)="allBooksCat()">All Books</a>
       </li>
       <li class="nav-item">
-        <button class="nav-link btn btn-link" (click)="findOtherCat('fiction')">
-          Fiction
-        </button>
+          <a role="button" class="nav-link btn btn-link" (click)="findOtherCat('fiction')">Fiction</a>
       </li>
       <li class="nav-item">
-        <button class="nav-link btn btn-link" (click)="findOtherCat('non-fiction')">
-          Non Fiction
-        </button>
+          <a role="button" class="nav-link btn btn-link" (click)="findOtherCat('non-fiction')">Non Fiction</a>
       </li>
       <li class="nav-item">
-        <button class="nav-link btn btn-link" (click)="findOtherCat('childrens')">
-          Children's
-        </button>
+          <a role="button" class="nav-link btn btn-link" (click)="findOtherCat('childrens')">Children's</a>
       </li>
       <li class="nav-item">
-        <button class="nav-link btn btn-link" (click)="findOtherCat('educational')">
-          Educational
-        </button>
+          <a role="button" class="nav-link btn btn-link" (click)="findOtherCat('educational')">Educational</a>
       </li>
       <li class="nav-item">
-        <button class="nav-link btn btn-link" (click)="findOtherCat('music')">
-          Music
-        </button>
+          <a role="button" class="nav-link btn btn-link" (click)="findOtherCat('music')">Music</a>
       </li>
       <li class="nav-item">
-        <button class="nav-link btn btn-link" (click)="findOtherCat('manga')">
-          Manga
-        </button>
+          <a role="button" class="nav-link btn btn-link" (click)="findOtherCat('manga')">Manga</a>
       </li>
-    </ul>
+  </ul>
+  
   </div>
 </nav>
 
