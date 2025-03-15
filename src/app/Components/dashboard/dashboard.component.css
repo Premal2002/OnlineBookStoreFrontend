@@ -343,4 +343,24 @@
 }
 
 
+/* ResponsiveNess For Books section */
+/* Smaller image for small screens */
+@media (max-width: 576px) {
+  .book-image {
+    height: 120px;
+  }
+  
+  /* Adjust font size for small screens */
+  .book-title {
+    font-size: 1rem; /* Smaller title */
+  }
+
+  .book-price {
+    font-size: 0.875rem; /* Smaller price text */
+  }
+}
+
+/* Responsiveness End */
+
+
 
